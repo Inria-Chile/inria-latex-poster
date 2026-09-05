@@ -23,7 +23,6 @@
 %\pgfdeclareimage[width=\titlelogowidth]{InriaTitle}{\logopremiere}
 %\newcommand{\titlelogo}{\pgfuseimage{InriaTitle}}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Slide title & decoration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,7 +37,6 @@
 \setbeamercolor{framesubtitle}{fg=inria-noir, bg=inria-2024-gris-bleu}
 \setbeamercolor{author in head/foot}{fg=inria-blanc, bg=inria-noir}
 \setbeamercolor{title in head/foot}{fg=inria-blanc, bg=inria-noir}
-
 
 %\setbeamercolor*{normal text}{fg=saclaydk, bg=white}
 % set block
@@ -62,9 +60,9 @@
 \setbeamertemplate{navigation symbols}{}  % no navigation on a poster
 
 \setbeamertemplate{background canvas}{%
-\begin{tikzpicture}[remember picture, overlay]
-  \path[shade,bottom color=inria-2024-gris-bleu!11,top color=inria-blanc!100] ([shift={(0.cm,-8.3cm)}]current page.north west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
-\end{tikzpicture}%     
+  \begin{tikzpicture}[remember picture, overlay]
+    \path[shade,bottom color=inria-2024-gris-bleu!11,top color=inria-blanc!100] ([shift={(0.cm,-8.3cm)}]current page.north west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
+  \end{tikzpicture}%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,7 +83,7 @@
   color(27bp)=(inria-2024-bleu-nuit);
   color(48bp)=(inria-2024-framboise);
   color(61bp)=(inria-rouge);
-  color(100bp)=(inria-rouge)}
+color(100bp)=(inria-rouge)}
 % inria coin=<angle> rotates the gradient together with the glyph (0 = arms to the right and down).
 \tikzset{inria coin/.style={shading=inriacoin, shading angle=#1-42}, inria coin/.default=0}
 
@@ -119,7 +117,7 @@
   % Corner glyph at the top left of the title bar, inset from the corner
   overlay={\shade[inria coin] ([shift={(\decoinset,-\decoinset)}]frame.north west)
     -- ++(\coinsize,0) -- ++(0,-\coinarm) -- ++(\coinarm-\coinsize,0)
-    -- ++(0,\coinarm-\coinsize) -- ++(-\coinarm,0) -- cycle;},
+  -- ++(0,\coinarm-\coinsize) -- ++(-\coinarm,0) -- cycle;},
   #1
 }
 
@@ -142,7 +140,7 @@
   % Corner glyph, rotated 180 degrees, at the bottom right of the block, inset from the corner
   overlay={\shade[inria coin=180] ([shift={(-\decoinset,\decoinset)}]frame.south east)
     -- ++(-\coinsize,0) -- ++(0,\coinarm) -- ++(\coinsize-\coinarm,0)
-    -- ++(0,\coinsize-\coinarm) -- ++(\coinarm,0) -- cycle;},
+  -- ++(0,\coinsize-\coinarm) -- ++(\coinarm,0) -- cycle;},
   #1%
 }
 
@@ -187,40 +185,40 @@
 
 % Poster header
 \setbeamertemplate{headline}{
-    \leavevmode
-    \begin{beamercolorbox}[wd=\linewidth]{upper separation line head}
+  \leavevmode
+  \begin{beamercolorbox}[wd=\linewidth]{upper separation line head}
     \vskip7.4ex
-    \end{beamercolorbox}
-    \begin{columns}[b]
-      \begin{column}{.011\linewidth}
-      \end{column}
-      \begin{column}{.21\linewidth}
-        \includegraphics[width=1\linewidth]{theme/rf-inria}
-      \end{column}
-      \begin{column}{.74\linewidth}
-        \raggedright
-        \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[0.92ex]}
-        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[0.29ex]}
-        \usebeamercolor{institute in headline}{\color{fg}\normalsize{\insertinstitute}\\[0.74ex]}     
-      \end{column}
-      \begin{column}{.011\linewidth}
-      \end{column}
-    \end{columns}
-    \begin{beamercolorbox}[wd=\linewidth]{lower separation line head}
+  \end{beamercolorbox}
+  \begin{columns}[b]
+    \begin{column}{.011\linewidth}
+    \end{column}
+    \begin{column}{.21\linewidth}
+      \includegraphics[width=1\linewidth]{theme/rf-inria}
+    \end{column}
+    \begin{column}{.74\linewidth}
+      \raggedright
+      \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[0.92ex]}
+      \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[0.29ex]}
+      \usebeamercolor{institute in headline}{\color{fg}\normalsize{\insertinstitute}\\[0.74ex]}
+    \end{column}
+    \begin{column}{.011\linewidth}
+    \end{column}
+  \end{columns}
+  \begin{beamercolorbox}[wd=\linewidth]{lower separation line head}
     \vskip2ex
-    \end{beamercolorbox}
+  \end{beamercolorbox}
 }
 
 % Poster footer
 \setbeamertemplate{footline}{
-\begin{tikzpicture}[remember picture, overlay]
-  \shade[
+  \begin{tikzpicture}[remember picture, overlay]
+    \shade[
       left color=inria-2024-bleu-nuit,
-      right color=inria-2024-framboise] ([shift={(0.cm,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.5\paperwidth, 0.cm)}]current page.south east);
-  \shade[
+    right color=inria-2024-framboise] ([shift={(0.cm,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.5\paperwidth, 0.cm)}]current page.south east);
+    \shade[
       left color=inria-2024-framboise,
-      right color=inria-rouge] ([shift={(0.5\paperwidth,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
-\end{tikzpicture}%     
+    right color=inria-rouge] ([shift={(0.5\paperwidth,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
+  \end{tikzpicture}%
 }
 
 % Configure enums or items
