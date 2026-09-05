@@ -1,0 +1,25 @@
+    \begin{tikzpicture}[scale=2.9, every node/.style={font=\small}]
+    % Define coordinates for the centers of the 3 circles
+    \coordinate (A) at (0, 0.6);
+    \coordinate (B) at (-0.7, -0.4);
+    \coordinate (C) at (0.7, -0.4);
+
+    % Draw and fill the circles with opacity so intersections show up
+    \draw[thick, fill=inria-2024-rouge, fill opacity=0.74] (A) circle (1.2cm);
+    \draw[thick, fill=inria-2024-gris-bleu, fill opacity=0.74] (B) circle (1.2cm);
+    \draw[thick, fill=inria-2024-framboise, fill opacity=0.74] (C) circle (1.2cm);
+
+    % Outer Set Labels
+    \node[color=white] at (0, 1.4) {Inria};
+    \node[color=white] at (-1.2, -0.92) {\LaTeX};
+    \node[color=white] at (1.2, -0.92) {Poster};
+
+    % 1. Label for the exact center overlap (A intersect B intersect C)
+    % Uses barycentric coordinates to find the exact middle of A, B, and C
+    \node[text opacity=1, color=white] at (barycentric cs:A=1,B=1,C=1) {You};
+
+    % 2. Labels for dual-overlaps (e.g., just A and B)
+    %\node[text opacity=1] at (barycentric cs:A=1,B=1) {$A \cap B$};
+    %\node[text opacity=1] at (barycentric cs:A=1,C=1) {$A \cap C$};
+    %\node[text opacity=1] at (barycentric cs:B=1,C=1) {$B \cap C$};
+\end{tikzpicture}

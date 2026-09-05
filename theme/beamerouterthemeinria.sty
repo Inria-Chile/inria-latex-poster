@@ -1,0 +1,45 @@
+%
+% LaTeX beamer theme, Inria 2024
+%
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{headline}{inria}
+{%
+      \leavevmode
+      % empty
+}
+
+\defbeamertemplate*{footline}{inria}
+{%
+      \leavevmode
+      \hspace*{\hmargin}%
+      \raisebox{0.4\footerheight}{%
+          \parbox{\dimexpr\paperwidth-2\hmargin}{%
+               {%
+                 \textcolor{inria-noir}{%
+                   % \insertdate
+                   \beamer@shortdate
+                   \hfill
+                   \ifnum\thepage>1\relax
+                      \smash{\raisebox{-0.1\footerheight}{\footerlogo}}
+                   \fi
+                   \kern2em\parbox{1em}{\raggedleft\insertframenumber}
+                 }
+               }
+          }
+       }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mode<all>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

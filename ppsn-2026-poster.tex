@@ -1,0 +1,384 @@
+% =====================================================================
+% PPSN 2026 Poster -- Prior Coverage and Search Bias in Multiview SR
+% Inria 2024 charter template (theme InriaChile), DIN A0 portrait.
+% =====================================================================
+\documentclass[final,svgnames,english]{beamer}
+\usepackage[english]{babel}
+
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+\usetheme{InriaPoster}
+
+% \usepackage[utf8]{inputenc}
+
+\usepackage{amsmath,amsthm, amssymb, latexsym}
+\usepackage{mathspec}
+\setmainfont{Inria Sans}[Scale=MatchLowercase, Kerning=Uppercase]
+\setsansfont{Inria Sans}[Scale=MatchLowercase, Kerning=Uppercase]
+\setmonofont{Fira Code}[Scale=0.74, Kerning=Uppercase]
+%\setmathfont(Digits,Latin,Greek,Symbols)[Scale=MatchLowercase]{Inria Serif}
+\setmathrm[Scale=MatchLowercase]{Inria Sans}
+%\usepackage{mathastext}
+
+% \boldmath %math en gras
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{qrcode}
+\usepackage{adjustbox}
+\usepackage{xspace}
+\usepackage{nicefrac}
+\usepackage{multiobjective}
+\usepackage{fontawesome7}
+\usepackage{minted}
+\urlstyle{tt}
+\usepackage{setspace}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, backgrounds, arrows, shapes}
+\usepackage{smartdiagram}
+\usepackage{lipsum}
+
+\usepackage[backend=biber, style=apa6]{biblatex}
+\usepackage{csquotes}
+
+\DeclareFieldFormat{hal}{%
+  \mkbibacro{hal}\addcolon\space
+  \ifhyperref
+    {\href{https://hal.archives-ouvertes.fr/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+    
+\DeclareFieldAlias{eprint:hal}{hal}
+\DeclareFieldAlias{eprint:HAL}{eprint:hal}
+
+\renewbibmacro*{eprint}{%
+  \printfield{hal}%
+  \newunit\newblock
+  \iffieldundef{eprinttype}
+    {\printfield{eprint}}
+    {\printfield[eprint:\strfield{eprinttype}]{eprint}}}
+
+\DeclareFieldFormat{url}{%
+\mkbibacro{doi}\addcolon\space
+\ifhyperref
+  {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  {\nolinkurl{#1}}}
+
+\DeclareFieldFormat{url}{url\addcolon\space\url{#1}}
+
+\renewbibmacro*{url+urldate}{%
+  \ifthenelse{\iffieldundef{url}\OR\NOT\iffieldundef{doi}}
+    {}
+    {\iffieldundef{urlyear}
+      {}
+      {%\bibstring{retrieved}%
+       \setunit{\addspace}%
+       %\printurldate
+       %\setunit{\urldatecomma}%
+       %\bibstring{from}%
+       %\setunit{\addspace}
+       }%
+     \iffieldundef{url}{}{\printfield{url}\renewcommand*{\finentrypunct}{\relax}}}}
+
+\begin{filecontents*}[noheader,overwrite]{self.bib}
+@inproceedings{author-year:keyword,
+    title       = {An Amazing Poster Inspired on the Inria Charter},
+    author      = {One Author and Another Author},
+    booktitle   = {19th {I}nternational {C}onference on {A}mazing {P}osters},
+    publisher   = {International Poster Association},
+    address     = {Las Condes, Chile},
+    year        = {2032},
+    doi         = {xx.xxx/xxx-x-xxx-xxxx-x_x},
+    hal         = {hal-xyz},
+}
+\end{filecontents*}
+\addbibresource{self.bib} % Bibliography file
+%     editor      = {Doina Bucur and Della Cioppa, Antonio  and Ting Hu and Eric Medvet},
+
+\graphicspath{{figures/}}
+%\setlength{\parindent}{0pt}
+%\renewcommand{\arraystretch}{1.15}
+
+% ---------------------------------------------------------------------
+% Highlight boxes. Not specific of the Inria charter but nice to have
+% ---------------------------------------------------------------------
+\newtcolorbox{callout}{%
+  enhanced, sharp corners, colback=inria-2024-rouge!11, width=\linewidth,
+  colframe=inria-2024-rouge, boxrule=0pt, leftrule=7.4pt,
+  left=11pt, right=5pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=5pt}
+
+\newtcolorbox{takeaway}{%
+  enhanced, sharp corners, colback=inria-2024-vert-tendre!11, width=\linewidth,
+  colframe=inria-2024-vert-tendre, boxrule=0pt, leftrule=7.4pt,
+  left=11pt, right=5pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=5pt}
+  
+\newtcolorbox{inform}{%
+  enhanced, sharp corners, colback=inria-2024-gris-bleu!11, width=\linewidth,
+  colframe=inria-2024-gris-bleu, boxrule=0pt, leftrule=7.4pt,
+  left=11pt, right=5pt, top=9pt, bottom=9pt,
+  before skip=11pt, after skip=5pt}
+
+% 
+\newtcolorbox{findingblock}[2]{%
+  enhanced, sharp corners, colback=inria-2024-#2!1, width=\linewidth,
+  colframe=inria-2024-#2, boxrule=0.47pt, leftrule=7.4pt,title={#1}, detach title,
+  before upper={\textbf{\tcbtitle}\ },
+  coltitle=inria-2024-#2,
+  left=11pt, right=5pt, top=9pt, bottom=9pt,
+  before skip=5pt, after skip=5pt}
+
+
+\title{An Amazing Poster Inspired on the Inria Charter}
+\author{One Author and Another Author}
+\institute[]{Inria Chile Research Center, Las Condes, Santiago, Chile. \url{https://inria.cl} --- \url{first.last@inria.cl}}
+
+\begin{document}
+\begin{frame}[fragile]{}
+\vspace{-2em}
+\begin{columns}[T]
+    % Forcing left margin
+    \begin{column}{0.01\linewidth}
+    \end{column}
+
+    % Content
+    \begin{column}{0.98\linewidth}
+        % TL;DR section for the main findings. Adjust to your needs!
+        \begin{columns}[t]
+            \begin{column}{0.32\linewidth}
+                \begin{inriablock}{}
+                    \large Making nice looking posters (NLP) has been known to be an NP-hard problem.\raggedright
+                \end{inriablock}
+            \end{column}%\hfill
+            \begin{column}{0.32\linewidth}
+                \begin{inriablock}{}
+                    \large \ldots but, \tcblower \large \textbf{it does not have to be like that!}
+                \end{inriablock}
+            \end{column}%\hfill
+            \begin{column}{0.32\linewidth}
+                \begin{inriablock}{}
+                    \large We propose a polynomial-time solution to the NLP issue: \textcolor{inria-rouge}{\textbf{contributions are welcomed}}.
+                \end{inriablock}
+            \end{column}
+        \end{columns}
+        % Main content
+        \begin{columns}[T]
+            \begin{column}{.485\linewidth}
+            \begin{inriastartblock}{Context}
+                \begin{itemize}
+                    \item We love \LaTeX\ and we need to make posters.
+                    \item This is a poster template based on beamer.
+                    \item We have tried to capture the Inria charter with minimal variations.
+                    \item Also an starting point, please help and contribute.
+                    \item This raises the question: \textbf{what is the meaning of life without posters?}
+                \end{itemize}
+            \end{inriastartblock}
+            
+            \begin{inriablock}{Defining the Nice Looking Poster (NLP) Problem}
+                Find optimal poster $\hat{p}$ such that
+                \[
+                  \hat{p} = \argmin_{p\in\set{P}}{\left\lbrace T(p), U(p), F(p)\right\rbrace},\ \text{where}
+                \]
+                \begin{itemize}
+                  \item $T(p)$: time dedicated to prepare the poster,
+                  \item $U(p)$: ugliness of the poster,
+                  \item $F(p)$: frustration induced by the poster creation process, and
+                  \item $\set{P}$: set of all possible posters.
+                \end{itemize}
+                \begin{takeaway}
+                  As we already use \LaTeX\ for our papers, hence we will restrict $\set{P}$ to that domain.
+                \end{takeaway}
+            \end{inriablock}
+
+            \begin{inriablock}{The building blocks of the Inria poster}
+            We have defined four types of blocks:
+            \begin{itemize}
+                \item \texttt{inriastartblock}: a block to start the poster,
+                \item \texttt{inriablock}: blocks to use along the poster,
+                \item \texttt{inriafinalblock}: to be used as the final block of the poster, and
+                \item \texttt{plainblock}: a simple block for situations where you want to separate content, like in the next block.
+            \end{itemize}
+            \end{inriablock}
+
+            % a simple block to put context
+            \begin{plainblock}{}
+            \centering
+             %\begin{adjustbox}{max width=0.83\textwidth}
+             \input{sample-figs/tikz-sample-figure}
+             %\end{adjustbox}
+            \end{plainblock}
+
+            \begin{inriablock}{The specific Inria NLP instance}
+
+            In brief, we can say that an Inria NLP is,
+            \begin{itemize}
+              \item \textbf{Minimalist:} less is more, focus on readability of the content.
+              \item \textbf{Sophisticated:} these gradients are so cool.
+              \item \textbf{Compliant:} should include the RF Inria logo.
+              \begin{itemize}
+                \item Refer to the Inria charter of what to do if you want to include some logos.
+                \item this second level itemize is cool, right?
+              \end{itemize}
+            \end{itemize}
+            \end{inriablock}
+
+\begin{inriablock}{The (infinite) INLP loop}
+%\vspace{-2ex}
+\begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+        \begin{itemize}
+              \item Be concise.
+              \begin{itemize}
+                  \item Avoid long narrative text spans,
+                  \item instead itemize or enumerate.
+              \end{itemize}
+              \item Be precise.
+              \item Be illustrative.
+              \item Be self-contained.
+              \item Ensure readability at a distance.
+              \item Stick to the Inria colors.
+              \begin{itemize}
+                  \item you earn extra points if your plots also use those colors!
+              \end{itemize}
+            \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \input{sample-figs/tikz-loop.tex}
+    \end{column}
+    \end{columns}
+% \begin{itemize}
+%     \item \textbf{Checks before printing:} Print drafts before printing the definitive one.
+%               \begin{itemize}
+%                 \item Some thin lines might not print well.
+%                 \item Colors might be different on the screen and in the printed version.
+%               \end{itemize}
+%   \end{itemize}
+\end{inriablock}
+
+% You can move this block around to fit your poster content
+    \begin{plainblock}{}
+    \begin{columns}[c]
+        \begin{column}{0.092\textwidth}
+        \qrcode[height=\textwidth,hyperlink]{https://github.com/Inria-Chile/inria-latex-poster}
+        \end{column}
+        \begin{column}{0.9\textwidth}%
+            {\linespread{0.83}\footnotesize\fullcite{author-year:keyword}\\[-1.28ex]
+            \textbf{Code:} \url{https://github.com/Inria-Chile/inria-latex-poster}}
+        \end{column}
+    \end{columns}
+    \end{plainblock}
+\end{column}
+
+% Column 2
+\begin{column}{.485\linewidth}
+    \begin{plainblock}{}
+        \begin{findingblock}{Finding 1. Using \texttt{findingblock} to draw attention.}{framboise}
+        
+        You can use \texttt{findingblock} to draw attention to the main findings of the paper.
+        \begin{minted}{latex}
+        \begin{findingblock}{Title of finding}{inria-color}
+            <text of the finding>
+        \end{findingblock}
+        \end{minted}
+        \begin{itemize}
+                \item \textbf{\texttt{inria-color}}: rouge, framboise, violet, bleu-nuit, bleu-canard, bleu-azur, bleu-vert, gris-bleu, cactus, vert-tendre, jaune, orange, and sable.
+        \end{itemize}
+        \end{findingblock}
+        
+        \begin{findingblock}{Finding 2. This is actually cool.}{violet}
+            \begin{columns}[T]
+                \begin{column}{0.6\textwidth}
+                    \begin{itemize}
+                        \item Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                        \item Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. 
+                        \item Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. 
+                        \item Donec vehicula augue eu neque.
+                        \item Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                    \end{itemize} 
+                \end{column}
+                \begin{column}{0.38\textwidth}
+                \input{sample-figs/tikz-findings-venn.tex}
+                \end{column}
+            \end{columns}
+        \end{findingblock}
+    
+        \begin{findingblock}{Finding 3. We have other blocks.}{framboise}
+            \begin{takeaway}
+                \texttt{takeaway}: green block for good news. \lipsum[1][1-2]
+            \end{takeaway}
+        
+            \begin{callout}
+                \texttt{callout}: a red block to draw attention. \lipsum[1][1-2]
+            \end{callout}
+        
+            \begin{inform}
+                \texttt{inform}: to frame some important information or definition. \lipsum[1][1-2]
+            \end{inform}
+        \end{findingblock}
+    
+        \begin{findingblock}{Finding 4. Columns inside your findings are your friend.}{violet}
+            \begin{columns}[T]
+                \begin{column}{0.38\textwidth}
+                    \begin{itemize}
+                      \item You can organize your content as (nested) columns.
+                            \begin{itemize}
+                              \item helps to have narrative next to visual elements, 
+                              \item it can be fun.
+                            \end{itemize}
+                    \end{itemize}
+                \end{column}
+                \begin{column}{0.6\textwidth}
+                    \centering
+                    %\input{sample-figs/tikz-rose-plots}
+                \end{column}
+            \end{columns}
+        \end{findingblock}
+    \end{plainblock}
+    
+    \begin{inriafinalblock}{Final remarks}
+        \begin{itemize}
+            \item Use \verb|\begin{inriafinalblock}{header}...\end{inriafinalblock}| to end your poster.
+            \item \textbf{Charter of use of the visual identity of Inria}:
+                \begin{itemize}
+                    \item \url{https://www.inria.fr/en/charter-use-visual-identity-inria}
+                \end{itemize}
+            \item \textbf{More info in Numin}:
+                \begin{itemize}
+                    \item \url{https://numin.inria.fr/portal/g/:spaces:71lwaa/base_de_connaissance/notes/106} 
+                \end{itemize}
+            \item We are aware that this is far from perfect. 
+            \item Feel free to contribute your own improvements.
+            \item Made with \faHeart\ by Inria Chile.
+        \end{itemize}
+    \end{inriafinalblock}
+\end{column}
+\end{columns}
+\end{column}
+
+% right margin
+\begin{column}{0.01\linewidth}
+\end{column}
+\end{columns}
+
+%\begin{plainblock}{}  %{TL;DR}
+% \begin{columns}[t]
+%     \begin{column}{0.4\linewidth}
+%     \begin{inriablock}{}
+%         \large Evolutionary symbolic regression improves when domain-specific priors are used to initialize search.
+%     \end{inriablock}
+%     \end{column}
+%     \begin{column}{0.29\linewidth}
+%     \begin{plainblock}{}
+%         \large \ldots but, \tcblower \large \textbf{What defines a good set of priors?}
+%     \end{plainblock}
+%     \end{column}
+%     \begin{column}{0.29\linewidth}
+%     \begin{inriafinalblock}{}
+%         \large We evaluate priors along two axes: \tcblower\large\textcolor{inria-rouge}{\textbf{coverage}} and \textcolor{inria-rouge}{\textbf{diversity}}.
+%     \end{inriafinalblock}
+%     \end{column}
+% \end{columns}
+
+\end{frame}
+\end{document}

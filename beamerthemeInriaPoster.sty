@@ -1,0 +1,226 @@
+\ProvidesPackage{beamerthemeInriaPoster}
+
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{MnSymbol}
+\RequirePackage{tikz}
+\RequirePackage{svg}
+\usepgflibrary{shadings}
+\tcbuselibrary{skins}
+
+\usetikzlibrary{matrix}
+
+\mode<presentation>
+
+\usecolortheme{inria}
+
+\newcommand{\logopremiere}{theme/imgs/RF-INria_Bloc-marque.png}
+\newcommand{\logobaspage}{theme/imgs/Inria-logo-rouge.png}
+
+\newcommand{\pngangle}{theme/imgs/angle.png}
+\newcommand{\pngbarre}{theme/imgs/Filet-7pt.png}
+
+%\newlength\titlelogowidth
+%\setlength\titlelogowidth{.3\textwidth}
+%\pgfdeclareimage[width=\titlelogowidth]{InriaTitle}{\logopremiere}
+%\newcommand{\titlelogo}{\pgfuseimage{InriaTitle}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Slide title & decoration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercolor{headline}{fg=inria-noir,bg=inria-blanc}
+\setbeamercolor{footline}{fg=inria-noir, bg=inria-blanc}
+\setbeamerfont{footline}{size=\large,series=\sf}
+\setbeamercolor{separation line}{bg=inria-blanc}
+\setbeamercolor{title in headline}{fg=inria-noir}
+\setbeamercolor{author in headline}{fg=inria-2024-gris-bleu}
+\setbeamercolor{institute in headline}{fg=inria-2024-bleu-nuit}
+\setbeamercolor{framesubtitle}{fg=inria-noir, bg=inria-2024-gris-bleu}
+\setbeamercolor{author in head/foot}{fg=inria-blanc, bg=inria-noir}
+\setbeamercolor{title in head/foot}{fg=inria-blanc, bg=inria-noir}
+
+
+%\setbeamercolor*{normal text}{fg=saclaydk, bg=white}
+% set block
+
+\setbeamercolor*{block body}{bg=inria-blanc,fg=inria-noir}
+\setbeamercolor*{block title}{fg=inria-2024-bleu-nuit,bg=inria-blanc}
+\setbeamercolor*{block text}{fg=inria-2024-gris-bleu,bg=inria-blanc}
+\setbeamerfont*{block title}{series=\bf\large}
+
+%\setbeamercolor*{upper separation line head}{fg=saclaydk}
+% set example block
+\setbeamercolor*{block body example}{fg=inria-2024-cactus,bg=inria-blanc}
+\setbeamercolor*{example text}{bg=white,fg=inria-2024-cactus}
+\setbeamercolor*{block title example}{fg=inria-2024-cactus,bg=white}
+
+\setbeamercolor{block body alerted}{bg=inria-blanc,fg=inria-rouge}
+\setbeamercolor{block title alerted}{bg=inria-blanc,fg=inria-rouge}
+\setbeamercolor{alerted text}{bg=inria-blanc,fg=inria-rouge}
+
+%\setbeamercolor{structure}{fg=bleu}
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+\setbeamertemplate{background canvas}{%
+\begin{tikzpicture}[remember picture, overlay]
+  \path[shade,bottom color=inria-2024-gris-bleu!11,top color=inria-blanc!100] ([shift={(0.cm,-8.3cm)}]current page.north west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
+\end{tikzpicture}%     
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ---- decorative corner glyph on block title bars ----
+\newlength{\coinsize}
+\setlength{\coinsize}{0.029\paperwidth} 
+
+\newtcolorbox{inriastartblock}[2][]{%
+  enhanced,
+  colback=inria-blanc,
+  colframe=inria-blanc,
+  coltitle=inria-2024-gris-bleu,
+  colbacktitle=inria-blanc,
+  %rounded corners=southeast,
+  toptitle=0.74\coinsize,
+  %top=0.74\coinsize,
+  %bottom=0.92em,
+  %sharp corners,
+  lefttitle=\coinsize,
+  title=#2,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block text},
+  fontlower=\usebeamerfont{block text},
+  % Attach the image to the top right of the title bar
+  overlay={
+    \node[anchor=north west] at (frame.north west) {\includegraphics[height=\coinsize]{theme/imgs/coin_degrade.pdf}};
+    },
+  #1
+}
+
+\newtcolorbox{inriafinalblock}[2][]{%
+  enhanced,
+  colback=inria-2024-sable!47,
+  colframe=inria-2024-sable!47,
+  coltitle=inria-2024-gris-bleu,
+  colbacktitle=inria-2024-sable!47,
+  %rounded corners=southeast,
+  lefttitle=\coinsize,
+  toptitle=1em,
+  top=0.47em,
+  bottom=0.92em,
+  %sharp corners,
+  title=#2,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block text},
+  fontlower=\usebeamerfont{block text},
+  % Attach the image to the top right of the title bar
+  overlay={\node[anchor=south east] at (frame.south east) {\includegraphics[height=\coinsize,angle=180]{theme/imgs/coin_degrade.pdf}};},
+  #1%
+}
+
+\newtcolorbox{inriablock}[2][]{%
+  enhanced,
+  colback=inria-blanc,
+  colframe=inria-blanc,
+  coltitle=inria-2024-gris-bleu,
+  colbacktitle=inria-blanc,
+  rounded corners=southeast,
+  toptitle=0.92em,
+  top=0.92em,
+  lefttitle=\coinsize,
+  %bottom=0.92em,
+  %sharp corners=northwest,
+  title=#2,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block text},
+  fontlower=\usebeamerfont{block text},
+  % Attach the image to the top right of the title bar
+  %overlay={\node[anchor=north west] at (frame.north west) {\includegraphics[height=0.0029\paperheight]{\pngbarre}};},
+  overlay={\node[
+        anchor=north west,
+        matrix of nodes,
+        % Apply common styles to all cells automatically
+    ] at (frame.north west) {
+        \node[] {A}; &
+        \node[] {B}; \\
+    };},
+  #1%
+}
+
+\newtcolorbox{plainblock}[2][]{%
+  enhanced,
+  colback=inria-blanc,
+  colframe=inria-blanc,
+  coltitle=inria-2024-gris-bleu,
+  colbacktitle=inria-blanc,
+  rounded corners=southeast,
+  toptitle=1em,
+  %top=0.47em,
+  %bottom=0.92em,
+  %sharp corners=northwest,
+  title=#1,
+  fonttitle=\usebeamerfont{block title},
+  fontupper=\usebeamerfont{block text},
+  fontlower=\usebeamerfont{block text},
+  #1%
+}
+
+% Poster header
+\setbeamertemplate{headline}{
+    \leavevmode
+    \begin{beamercolorbox}[wd=\linewidth]{upper separation line head}
+    \vskip7.4ex
+    \end{beamercolorbox}
+    \begin{columns}[b]
+      \begin{column}{.011\linewidth}
+      \end{column}
+      \begin{column}{.21\linewidth}
+        \includegraphics[width=1\linewidth]{theme/rf-inria}
+      \end{column}
+      \begin{column}{.74\linewidth}
+        \raggedright
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[0.92ex]}
+        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[0.29ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\normalsize{\insertinstitute}\\[0.74ex]}     
+      \end{column}
+      \begin{column}{.011\linewidth}
+      \end{column}
+    \end{columns}
+    \begin{beamercolorbox}[wd=\linewidth]{lower separation line head}
+    \vskip2ex
+    \end{beamercolorbox}
+}
+
+% Poster footer
+\setbeamertemplate{footline}{
+\begin{tikzpicture}[remember picture, overlay]
+  \shade[
+      left color=inria-2024-bleu-nuit,
+      right color=inria-2024-framboise] ([shift={(0.cm,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.5\paperwidth, 0.cm)}]current page.south east);
+  \shade[
+      left color=inria-2024-framboise,
+      right color=inria-rouge] ([shift={(0.5\paperwidth,0.0074\paperheight)}]current page.south west) rectangle ([shift={(-0.cm, 0.cm)}]current page.south east);
+\end{tikzpicture}%     
+}
+
+% Configure enums or items
+\mode<all>
+
+\setbeamercolor{itemize item}{fg=inria-rouge}
+\setbeamercolor{enumerate item}{fg=inria-rouge}
+\setbeamercolor{itemize subitem}{fg=inria-rouge}
+\setbeamercolor{enumerate subitem}{fg=inria-rouge}
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{\bf >}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\rcurvearrowse$}\hskip0.1em}
+
+% equal font sizes for all levels
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+% bibliography
+\setbeamercolor{bibliography entry author}{fg=inria-noir}
+\setbeamercolor{bibliography entry title}{fg=inria-rouge}
+%\setbeamerfont{bibliography entry title}{series=\bf}
+\setbeamercolor{bibliography entry location}{fg=inria-noir}
+\setbeamercolor{bibliography entry note}{fg=inria-noir}
+\setbeamercolor{bibliography item}{fg=inria-noir} % Changes the icon/label color

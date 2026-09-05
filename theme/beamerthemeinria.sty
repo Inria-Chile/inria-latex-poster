@@ -1,0 +1,203 @@
+%
+% LaTeX beamer theme, Inria 2024
+% \ProvidesPackageRCS beamerthemeinria.sty
+%
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% General 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% titre slide table of contents. \contentsname est proposé
+% à la fois par beamer et redéfini ensuite dans babel.
+%  \newcommand{\contentsname}{Sommaire}
+
+% titre planche "\merci"
+\newcommand{\thankyou}{Merci.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{tikz}
+\RequirePackage{fmtcount}
+\RequirePackage{calc}
+\RequirePackage{ifdraft}
+
+\IfFileExists{inriafontes.sty}{%
+\RequirePackage[InriaSans]{inriafontes}%
+}{%
+\PackageWarning{themeinria}{\MessageBreak
+==============================================\MessageBreak
+= Utilisez le paquet\MessageBreak
+= gitlab.inria.fr/gabarits/latex-inria-fonts\MessageBreak
+= pour utiliser les fontes Inria.\MessageBreak
+==============================================\MessageBreak}
+\newcommand{\switchtosans}{}
+\newcommand{\switchtoserif}{}
+}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TEXTPOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[absolute,overlay]{textpos}
+
+% Point de référence
+\textblockorigin{0mm}{0mm}
+
+% Unités en abscisses et en ordonnées
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+
+% \TPshowboxestrue
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Logos & images
+%% - bloc marque RF+Inria
+%% - logo Inria
+%% - angle supérieur gauche
+%% - barre dégradée
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\logopremiere}{theme/imgs/RF-INria_Bloc-marque.png}
+\newcommand{\logobaspage}{theme/imgs/Inria-logo-rouge.png}
+
+\newcommand{\pngangle}{theme/imgs/angle.png}
+\newcommand{\pngbarre}{theme/imgs/Filet-7pt.png}
+
+\newlength\titlelogowidth
+\setlength\titlelogowidth{.3\textwidth}
+\pgfdeclareimage[width=\titlelogowidth]{InriaTitle}{\logopremiere}
+\newcommand{\titlelogo}{\pgfuseimage{InriaTitle}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Slide title & decoration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pgfdeclareimage[height=2ex]{Angle}{\pngangle}
+\newcommand{\anglepng}{\pgfuseimage{Angle}}
+
+\newlength{\angleheight}
+\settoheight{\angleheight}{\pgfuseimage{Angle}}
+\newlength{\anglewidth}
+\settowidth{\anglewidth}{\pgfuseimage{Angle}}
+
+\pgfdeclareimage[width=6em]{Barre}{\pngbarre}
+\newcommand{\barrecouleur}{\pgfuseimage{Barre}}
+
+\pgfdeclareimage[width=4em]{BarreQ}{\pngbarre}
+\newcommand{\barrecouleurQ}{\pgfuseimage{BarreQ}}
+
+\pgfdeclareimage[width=5em]{BarreC}{\pngbarre}
+\newcommand{\barrecouleurC}{\pgfuseimage{BarreC}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fullpage & Canvas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% vertical margin
+\newlength\vmargin
+\setlength\vmargin{.07\paperheight}
+
+\newlength\fullpageinnervmargin
+\setlength\fullpageinnervmargin{\vmargin}
+
+%% horizontal margin
+\newlength\hmargin
+\setlength\hmargin{.05\paperwidth}
+
+\newlength\fullpageinnerhmargin
+\setlength\fullpageinnerhmargin{\dimexpr\hmargin+2\anglewidth}
+
+\setbeamersize{%
+  text margin left = \fullpageinnerhmargin,
+  text margin right = \fullpageinnerhmargin,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength\footerheight
+\setlength\footerheight{\fullpageinnervmargin}
+
+\pgfdeclareimage[height=0.4\footerheight]{InriaFooter}{\logobaspage}
+\newcommand{\footerlogo}{\pgfuseimage{InriaFooter}}
+
+\newlength\posfooterline
+\setlength\posfooterline{\fullpageinnervmargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Couleurs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Navigation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{navigation symbols}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blocks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercolor{block title}{fg=inria-noir}
+\setbeamerfont{block title}{series=\bfseries}
+
+\setbeamercolor{block title example}{fg=inria-noir}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Listes: item / enumerate 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\itemlevelone}{\tikz{%
+   \draw[fill=inria-rouge, color=inria-rouge, line width=0pt] %
+   (0,0.5ex) -- (0.7em,0) -- (0,-0.5ex); }}
+\newcommand{\itemleveltwo}{\tikz{%
+   \draw[fill=inria-noir,  color=inria-noir,  line width=0pt] %
+   circle(0.5ex); }}
+\newcommand{\itemlevelthree}{\tikz{%
+   \draw[fill=inria-rouge, color=inria-rouge, line width=0pt] %
+   (0,-0.5ex) rectangle (0.5em,0.5ex); }}
+
+\setlength{\leftmargini}{1.5em}
+\setlength{\leftmarginii}{0pt}
+\setlength{\leftmarginiii}{0pt}
+
+\setbeamertemplate{item projected}[default]
+\setbeamertemplate{itemize items}{\itemlevelone}
+\setbeamertemplate{itemize subitem}{\itemleveltwo}
+\setbeamertemplate{itemize subsubitem}{\itemlevelthree}
+
+% \setbeamertemplate{enumerate items}{\itemleveltwo}
+% \setbeamertemplate{enumerate subitems}[default]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fontes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{footline}{size=\tiny,series={}}
+
+\setbeamerfont{normal text}{}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamerfont{example text}{series=\bfseries}
+
+\AtBeginDocument{%
+  % switch to SansSerif fonts
+  \switchtosans
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usecolortheme{inria}
+\useoutertheme{inria}
+\useinnertheme{inria}
+
+\mode<all>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
