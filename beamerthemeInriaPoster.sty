@@ -17,7 +17,6 @@
 \newcommand{\logobaspage}{theme/imgs/Inria-logo-rouge.png}
 
 \newcommand{\pngangle}{theme/imgs/angle.png}
-\newcommand{\pngbarre}{theme/imgs/Filet-7pt.png}
 
 %\newlength\titlelogowidth
 %\setlength\titlelogowidth{.3\textwidth}
@@ -72,6 +71,15 @@
 %% ---- decorative corner glyph on block title bars ----
 \newlength{\coinsize}
 \setlength{\coinsize}{0.029\paperwidth} 
+
+%% ---- decorative gradient rule ("filet") on inriablock title bars ----
+%% Drawn with TikZ using the same gradient as the footline (bleu-nuit -> framboise -> rouge)
+%% instead of the bitmap theme/imgs/Filet-7pt.png.
+\tikzset{inria degrade/.style={left color=inria-2024-bleu-nuit, right color=inria-rouge, middle color=inria-2024-framboise}}
+\newlength{\filetheight}
+\setlength{\filetheight}{0.0029\paperheight} % ~7pt, as in the original Filet-7pt artwork
+\newlength{\filetwidth}
+\setlength{\filetwidth}{17\filetheight}      % aspect ratio of the original artwork (118.88 x 7)
 
 \newtcolorbox{inriastartblock}[2][]{%
   enhanced,
@@ -133,16 +141,8 @@
   fonttitle=\usebeamerfont{block title},
   fontupper=\usebeamerfont{block text},
   fontlower=\usebeamerfont{block text},
-  % Attach the image to the top right of the title bar
-  %overlay={\node[anchor=north west] at (frame.north west) {\includegraphics[height=0.0029\paperheight]{\pngbarre}};},
-  overlay={\node[
-        anchor=north west,
-        matrix of nodes,
-        % Apply common styles to all cells automatically
-    ] at (frame.north west) {
-        \node[] {A}; &
-        \node[] {B}; \\
-    };},
+  % Gradient rule at the top left of the title bar, inset by its own height from the corner
+  overlay={\shade[inria degrade] ([shift={(\filetheight,-\filetheight)}]frame.north west) rectangle ++(\filetwidth,-\filetheight);},
   #1%
 }
 
