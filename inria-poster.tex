@@ -36,8 +36,14 @@
 \usepackage{smartdiagram}
 \usepackage{lipsum}
 
-\usepackage[backend=biber, style=apa6]{biblatex}
+\usepackage[backend=biber, bibstyle=apa, autocite=superscript, defernumbers=true, citestyle=numeric]{biblatex}
 \usepackage{csquotes}
+
+\makeatletter
+\RequireBibliographyStyle{numeric}
+%\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+\DeclareFieldFormat{labelnumberwidth}{#1.}
+\makeatother
 
 \DeclareFieldFormat{hal}{%
   \mkbibacro{hal}\addcolon\space
@@ -78,8 +84,9 @@
 \iffieldundef{url}{}{\printfield{url}\renewcommand*{\finentrypunct}{\relax}}}}
 
 % Update this with your own information
+% DO NOT change the "this-paper" key.
 \begin{filecontents*}[noheader,overwrite]{self.bib}
-  @inproceedings{author-year:keyword,
+  @inproceedings{this-paper,
     title       = {An Amazing Poster Inspired on the Inria Charter},
     author      = {One Author and Another Author},
     booktitle   = {19th {I}nternational {C}onference on {A}mazing {P}osters},
@@ -93,10 +100,15 @@
   }
 \end{filecontents*}
 \addbibresource{self.bib} % Bibliography file
+\addbibresource{references.bib}
 
-\graphicspath{{figures/}}
-%\setlength{\parindent}{0pt}
-%\renewcommand{\arraystretch}{1.15}
+% Avoid that our paper shows up in bibliography
+\DeclareBibliographyCategory{thispapercat}
+\addtocategory{thispapercat}{this-paper}
+\AtBeginBibliography{\onehalfspacing}
+
+
+
 
 % ---------------------------------------------------------------------
 % Highlight boxes. Not specific of the Inria charter but nice to have
@@ -156,7 +168,7 @@ before skip=5pt, after skip=5pt}
         \end{column}%\hfill
         \begin{column}{0.32\linewidth}
           \begin{inriablock}{}
-            \large We propose a polynomial-time solution to the NLP issue: \textcolor{inria-rouge}{\textbf{contributions are welcomed}}.
+            \large We propose a polynomial-time solution to the NLP issue; \textcolor{inria-rouge}{\textbf{contributions are welcomed}}.
           \end{inriablock}
         \end{column}
       \end{columns}
@@ -165,13 +177,19 @@ before skip=5pt, after skip=5pt}
         \begin{column}{.485\linewidth}
           \begin{inriastartblock}{Context}
             \begin{itemize}
-              \item We love \LaTeX\ and we need to make posters.
-              \item This is a poster template based on beamer.
-              \item We have tried to capture the Inria charter with minimal variations.
-              \item Also an starting point, please help and contribute.
+              \item \TeX and \LaTeX\ \autocite{knuth:tex} are to  computer scientists what Latin was to ancient scholars.
+              \item This is true even in the era of AI \autocite{russell2020artificial}.
+              \item Can a poster be automated \autocite{hu2026postermeldmultiagentpapertopostergeneration}?
               \item This raises the question: \textbf{what is the meaning of life without posters?}
             \end{itemize}
-          \end{inriastartblock}
+        \end{inriastartblock}
+        \begin{inriablock}{An Inria-theme \LaTeX\ poster}
+            \begin{itemize}
+              \item This is a poster template based on beamer.
+              \item We have tried to capture the Inria charter with minimal variations.
+              \item Also a starting point: please help and contribute.
+            \end{itemize}
+          \end{inriablock}
 
           \begin{inriablock}{Defining the Nice Looking Poster (NLP) Problem}
             Find optimal poster $\hat{p}$ such that
@@ -179,18 +197,17 @@ before skip=5pt, after skip=5pt}
               \hat{p} = \argmin_{p\in\set{P}}{\left\lbrace T(p), U(p), F(p)\right\rbrace},\ \text{where}
             \]
             \begin{itemize}
-              \item $T(p)$: time dedicated to prepare the poster,
+              \item $T(p)$: time dedicated to preparing the poster,
               \item $U(p)$: ugliness of the poster,
               \item $F(p)$: frustration induced by the poster creation process, and
               \item $\set{P}$: set of all possible posters.
             \end{itemize}
             \begin{takeaway}
-              As we already use \LaTeX\ for our papers, hence we will restrict $\set{P}$ to that domain.
+              As we already use \LaTeX\ for our papers, we will restrict $\set{P}$ to that domain.
             \end{takeaway}
           \end{inriablock}
 
           \begin{inriablock}{The building blocks of the Inria poster}
-            We have defined four types of blocks:
             \begin{itemize}
               \item \texttt{inriastartblock}: a block to start the poster,
               \item \texttt{inriablock}: blocks to use along the poster,
@@ -208,14 +225,12 @@ before skip=5pt, after skip=5pt}
           \end{plainblock}
 
           \begin{inriablock}{The specific Inria NLP instance}
-
-            In brief, we can say that an Inria NLP is,
             \begin{itemize}
-              \item \textbf{Minimalist:} less is more, focus on readability of the content.
+              \item \textbf{Minimalist:} less is more; focus on the readability of the content.
               \item \textbf{Sophisticated:} these gradients are so cool.
               \item \textbf{Compliant:} should include the RF Inria logo.
                 \begin{itemize}
-                  \item Refer to the Inria charter of what to do if you want to include some logos.
+                  \item Refer to the Inria charter for what to do if you want to include some logos.
                   \item this second level itemize is cool, right?
                 \end{itemize}
             \end{itemize}
@@ -224,12 +239,12 @@ before skip=5pt, after skip=5pt}
           \begin{inriablock}{The (infinite) INLP loop}
             %\vspace{-2ex}
             \begin{columns}[T]
-              \begin{column}{0.45\textwidth}
+              \begin{column}{0.5\textwidth}
                 \begin{itemize}
                   \item Be concise.
                     \begin{itemize}
                       \item Avoid long narrative text spans,
-                      \item instead itemize or enumerate.
+                      \item instead, itemize or enumerate.
                     \end{itemize}
                   \item Be precise.
                   \item Be illustrative.
@@ -241,7 +256,7 @@ before skip=5pt, after skip=5pt}
                     \end{itemize}
                 \end{itemize}
               \end{column}
-              \begin{column}{0.5\textwidth}
+              \begin{column}{0.45\textwidth}
                 \centering
                 \input{sample-figs/tikz-loop.tex}
               \end{column}
@@ -255,7 +270,7 @@ before skip=5pt, after skip=5pt}
                 \qrcode[height=\textwidth,hyperlink]{https://github.com/Inria-Chile/inria-latex-poster}
               \end{column}
               \begin{column}{0.9\textwidth}%
-                {\linespread{0.83}\footnotesize\fullcite{author-year:keyword}\\[-1.28ex]
+                {\linespread{0.83}\footnotesize\fullcite{this-paper}\\[-1.28ex]
                 \textbf{Code:} \url{https://github.com/Inria-Chile/inria-latex-poster}}
               \end{column}
             \end{columns}
@@ -312,7 +327,7 @@ before skip=5pt, after skip=5pt}
 
             \begin{findingblock}{Finding 4. Columns inside your findings are your friend.}{violet}
               \begin{columns}[T]
-                \begin{column}{0.38\textwidth}
+                \begin{column}{0.47\textwidth}
                   \begin{itemize}
                     \item You can organize your content as (nested) columns.
                       \begin{itemize}
@@ -321,7 +336,7 @@ before skip=5pt, after skip=5pt}
                       \end{itemize}
                   \end{itemize}
                 \end{column}
-                \begin{column}{0.6\textwidth}
+                \begin{column}{0.47\textwidth}
                   \centering
                   \input{sample-figs/tikz-hepta}
                 \end{column}
@@ -352,10 +367,15 @@ before skip=5pt, after skip=5pt}
                 \begin{itemize}
                   \item \url{https://numin.inria.fr/portal/g/:spaces:71lwaa/base_de_connaissance/notes/106}
                 \end{itemize}
-              \item We are aware that this is far from perfect.
-              \item Feel free to contribute your own improvements.
             \end{itemize}
           \end{inriafinalblock}
+          % In general, it does not make sense to include a bibliography, but here you have it in case you need it.
+          \begin{plainblock}{\small References}
+            %%\renewcommand*{\bibfont}{\footnotesize}
+            \setlength{\bibitemsep}{0.29em}
+            \printbibliography[notcategory=thispapercat]
+          \end{plainblock}
+          
           \begin{plainblock}{}
             \centering
             Made with \faHeart\ by Inria Chile -- \url{https://inria.cl}.

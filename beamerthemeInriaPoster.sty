@@ -172,11 +172,11 @@ color(100bp)=(inria-rouge)}
   coltitle=inria-2024-gris-bleu,
   colbacktitle=inria-blanc,
   rounded corners=southeast,
-  toptitle=1em,
+  %toptitle=1em,
   %top=0.47em,
   %bottom=0.92em,
   %sharp corners=northwest,
-  title=#1,
+  title=#2,
   fonttitle=\usebeamerfont{block title},
   fontupper=\usebeamerfont{block text},
   fontlower=\usebeamerfont{block text},
@@ -239,7 +239,14 @@ color(100bp)=(inria-rouge)}
 % bibliography
 \setbeamercolor{bibliography entry author}{fg=inria-noir}
 \setbeamercolor{bibliography entry title}{fg=inria-rouge}
-%\setbeamerfont{bibliography entry title}{series=\bf}
 \setbeamercolor{bibliography entry location}{fg=inria-noir}
 \setbeamercolor{bibliography entry note}{fg=inria-noir}
 \setbeamercolor{bibliography item}{fg=inria-noir} % Changes the icon/label color
+%\setbeamertemplate{bibliography item}[numbered]
+%\setbeamertemplate{bibliography item}{\arabic{enumiv}.}
+
+\setbeamerfont{bibliography item}{size=\footnotesize}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
