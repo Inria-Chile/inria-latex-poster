@@ -245,13 +245,6 @@
         \input{sample-figs/tikz-loop.tex}
     \end{column}
     \end{columns}
-% \begin{itemize}
-%     \item \textbf{Checks before printing:} Print drafts before printing the definitive one.
-%               \begin{itemize}
-%                 \item Some thin lines might not print well.
-%                 \item Colors might be different on the screen and in the printed version.
-%               \end{itemize}
-%   \end{itemize}
 \end{inriablock}
 
 % You can move this block around to fit your poster content
@@ -327,7 +320,7 @@
                 \end{column}
                 \begin{column}{0.6\textwidth}
                     \centering
-                    %\input{sample-figs/tikz-rose-plots}
+                    \input{sample-figs/tikz-hepta}
                 \end{column}
             \end{columns}
         \end{findingblock}
@@ -336,19 +329,34 @@
     \begin{inriafinalblock}{Final remarks}
         \begin{itemize}
             \item Use \verb|\begin{inriafinalblock}{header}...\end{inriafinalblock}| to end your poster.
-            \item \textbf{Charter of use of the visual identity of Inria}:
+            \item \textbf{Source for this poster is available in:}
+            \begin{itemize}
+                \item \url{https://github.com/Inria-Chile/inria-latex-poster}
+            \end{itemize} 
+            \item \textbf{Inria \LaTeX\ beamer template:}
+            \begin{itemize}
+                \item \url{https://gitlab.inria.fr/gabarits/latex-beamer-2024}
+            \end{itemize}
+            \item \textbf{Inria fonts in \LaTeX:}
+             \begin{itemize}
+                \item \url{https://gitlab.inria.fr/gabarits/latex-inria-fonts}
+                \end{itemize}
+            \item \textbf{Charter of use of the visual identity of Inria:}
                 \begin{itemize}
                     \item \url{https://www.inria.fr/en/charter-use-visual-identity-inria}
                 \end{itemize}
-            \item \textbf{More info in Numin}:
+            \item \textbf{More info in Numin:}
                 \begin{itemize}
                     \item \url{https://numin.inria.fr/portal/g/:spaces:71lwaa/base_de_connaissance/notes/106} 
                 \end{itemize}
             \item We are aware that this is far from perfect. 
             \item Feel free to contribute your own improvements.
-            \item Made with \faHeart\ by Inria Chile.
         \end{itemize}
     \end{inriafinalblock}
+    \begin{plainblock}{}
+        \centering
+        Made with \faHeart\ by Inria Chile -- \url{https://inria.cl}.
+    \end{plainblock}
 \end{column}
 \end{columns}
 \end{column}
@@ -357,25 +365,5 @@
 \begin{column}{0.01\linewidth}
 \end{column}
 \end{columns}
-
-%\begin{plainblock}{}  %{TL;DR}
-% \begin{columns}[t]
-%     \begin{column}{0.4\linewidth}
-%     \begin{inriablock}{}
-%         \large Evolutionary symbolic regression improves when domain-specific priors are used to initialize search.
-%     \end{inriablock}
-%     \end{column}
-%     \begin{column}{0.29\linewidth}
-%     \begin{plainblock}{}
-%         \large \ldots but, \tcblower \large \textbf{What defines a good set of priors?}
-%     \end{plainblock}
-%     \end{column}
-%     \begin{column}{0.29\linewidth}
-%     \begin{inriafinalblock}{}
-%         \large We evaluate priors along two axes: \tcblower\large\textcolor{inria-rouge}{\textbf{coverage}} and \textcolor{inria-rouge}{\textbf{diversity}}.
-%     \end{inriafinalblock}
-%     \end{column}
-% \end{columns}
-
 \end{frame}
 \end{document}
