@@ -68,18 +68,37 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% ---- decorative corner glyph on block title bars ----
-\newlength{\coinsize}
-\setlength{\coinsize}{0.029\paperwidth} 
+%% ---- block decorations: corner glyph ("coin") and gradient rule ("filet") ----
+%% Both are drawn with TikZ, using the footline gradient (bleu-nuit -> framboise -> rouge),
+%% instead of the artwork files theme/imgs/coin_degrade.pdf and theme/imgs/Filet-7pt.png.
 
-%% ---- decorative gradient rule ("filet") on inriablock title bars ----
-%% Drawn with TikZ using the same gradient as the footline (bleu-nuit -> framboise -> rouge)
-%% instead of the bitmap theme/imgs/Filet-7pt.png.
+% Linear gradient of the rule (and of the footline).
 \tikzset{inria degrade/.style={left color=inria-2024-bleu-nuit, right color=inria-rouge, middle color=inria-2024-framboise}}
-\newlength{\filetheight}
+
+% Diagonal gradient of the corner glyph. TikZ stretches the 100bp-wide shading over twice
+% the glyph's bounding box, centred on it, so the stops below reproduce the original artwork
+% (blue at 9%, framboise at 64%, red at 100% of an axis running from near the outer corner
+% to about 2/3 of the way to the opposite corner, tilted 42 degrees). Blue ends up at the
+% outer corner, framboise around the inner corner and red at the tips of the arms.
+\pgfdeclarehorizontalshading{inriacoin}{100bp}{%
+  color(0bp)=(inria-2024-bleu-nuit);
+  color(27bp)=(inria-2024-bleu-nuit);
+  color(48bp)=(inria-2024-framboise);
+  color(61bp)=(inria-rouge);
+  color(100bp)=(inria-rouge)}
+% inria coin=<angle> rotates the gradient together with the glyph (0 = arms to the right and down).
+\tikzset{inria coin/.style={shading=inriacoin, shading angle=#1-42}, inria coin/.default=0}
+
+\newlength{\coinsize}    % side of the (square) corner glyph
+\newlength{\coinarm}     % thickness of the arms of the corner glyph
+\newlength{\filetheight} % thickness of the gradient rule
+\newlength{\filetwidth}  % length of the gradient rule
+\newlength{\decoinset}   % gap between a block corner and its decoration
+\setlength{\coinsize}{0.029\paperwidth}
+\setlength{\coinarm}{0.3086\coinsize}       % 7/22.68, as in the original coin_degrade artwork
 \setlength{\filetheight}{0.0029\paperheight} % ~7pt, as in the original Filet-7pt artwork
-\newlength{\filetwidth}
 \setlength{\filetwidth}{17\filetheight}      % aspect ratio of the original artwork (118.88 x 7)
+\setlength{\decoinset}{\filetheight}
 
 \newtcolorbox{inriastartblock}[2][]{%
   enhanced,
@@ -97,10 +116,10 @@
   fonttitle=\usebeamerfont{block title},
   fontupper=\usebeamerfont{block text},
   fontlower=\usebeamerfont{block text},
-  % Attach the image to the top right of the title bar
-  overlay={
-    \node[anchor=north west] at (frame.north west) {\includegraphics[height=\coinsize]{theme/imgs/coin_degrade.pdf}};
-    },
+  % Corner glyph at the top left of the title bar, inset from the corner
+  overlay={\shade[inria coin] ([shift={(\decoinset,-\decoinset)}]frame.north west)
+    -- ++(\coinsize,0) -- ++(0,-\coinarm) -- ++(\coinarm-\coinsize,0)
+    -- ++(0,\coinarm-\coinsize) -- ++(-\coinarm,0) -- cycle;},
   #1
 }
 
@@ -120,8 +139,10 @@
   fonttitle=\usebeamerfont{block title},
   fontupper=\usebeamerfont{block text},
   fontlower=\usebeamerfont{block text},
-  % Attach the image to the top right of the title bar
-  overlay={\node[anchor=south east] at (frame.south east) {\includegraphics[height=\coinsize,angle=180]{theme/imgs/coin_degrade.pdf}};},
+  % Corner glyph, rotated 180 degrees, at the bottom right of the block, inset from the corner
+  overlay={\shade[inria coin=180] ([shift={(-\decoinset,\decoinset)}]frame.south east)
+    -- ++(-\coinsize,0) -- ++(0,\coinarm) -- ++(\coinsize-\coinarm,0)
+    -- ++(0,\coinsize-\coinarm) -- ++(\coinarm,0) -- cycle;},
   #1%
 }
 
@@ -141,8 +162,8 @@
   fonttitle=\usebeamerfont{block title},
   fontupper=\usebeamerfont{block text},
   fontlower=\usebeamerfont{block text},
-  % Gradient rule at the top left of the title bar, inset by its own height from the corner
-  overlay={\shade[inria degrade] ([shift={(\filetheight,-\filetheight)}]frame.north west) rectangle ++(\filetwidth,-\filetheight);},
+  % Gradient rule at the top left of the title bar, inset from the corner
+  overlay={\shade[inria degrade] ([shift={(\decoinset,-\decoinset)}]frame.north west) rectangle ++(\filetwidth,-\filetheight);},
   #1%
 }
 
