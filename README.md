@@ -2,7 +2,7 @@
 
 A [beamer](https://ctan.org/pkg/beamer) + [beamerposter](https://ctan.org/pkg/beamerposter) template for scientific posters that follows the **Inria 2024 visual identity charter**, including the *République Française / Inria* block mark ("RF" logo) in the header and the Inria colour palette throughout. It is maintained by [Inria Chile](https://inria.cl).
 
-The repository ships a complete, compilable example poster (`poster.tex`, DIN A0 portrait) whose content doubles as documentation of the blocks and boxes provided by the theme.
+The repository ships a complete, compilable example poster (`inria-poster.tex`, DIN A0 portrait) whose content doubles as documentation of the blocks and boxes provided by the theme.
 
 <p align="center">
   <img src="theme/demo.png" alt="Preview of the example poster" width="47%">
@@ -11,7 +11,7 @@ The repository ships a complete, compilable example poster (`poster.tex`, DIN A0
 ## Features
 
 - **Inria charter look and feel**: RF Inria block mark in the header, gradient footer band (bleu nuit → framboise → rouge), block decorations (corner glyph and gradient rule) drawn with TikZ so they scale to any paper size.
-- **Inria 2024 colour palette** available as named colours (`inria-2024-rouge`, `inria-2024-bleu-nuit`, …).
+- **Inria 2024 colour palette** available as named colours (`inria-2024-rouge`, `inria-2024-bleu-nuit`, ...).
 - **Four block environments** (`inriastartblock`, `inriablock`, `inriafinalblock`, `plainblock`) built on `tcolorbox`.
 - **Highlight boxes** for findings, take-aways, callouts and definitions.
 - Inria Sans and Fira Code fonts, `minted` code listings, `biblatex` bibliography with HAL support, and a QR code pointing to your paper or code.
@@ -30,22 +30,22 @@ The repository ships a complete, compilable example poster (`poster.tex`, DIN A0
 ## Building
 
 ```sh
-latexmk -xelatex poster.tex
+latexmk -xelatex inria-poster.tex
 ```
 
 `latexmk` runs XeLaTeX, biber and XeLaTeX again as needed and produces `poster.pdf`. To remove the generated files:
 
 ```sh
-latexmk -C poster.tex
+latexmk -C inria-poster.tex
 ```
 
 ### Overleaf
 
-The project compiles on Overleaf: upload the repository (or import it from GitHub), open **Menu → Settings**, set the **Compiler** to *XeLaTeX* and the main document to `poster.tex`.
+The project compiles on Overleaf: upload the repository (or import it from GitHub), open **Menu → Settings**, set the **Compiler** to *XeLaTeX* and the main document to `inria-poster.tex`.
 
 ## Using the template
 
-Start from `poster.tex` and replace the sample content.
+Start from `inria-poster.tex` and replace the sample content.
 
 ### Title, authors and paper size
 
@@ -58,7 +58,7 @@ Start from `poster.tex` and replace the sample content.
 \institute[]{Inria Chile Research Center, Santiago, Chile. \url{https://inria.cl}}
 ```
 
-Change `orientation`, `size` (`a0`, `a1`, …) and `scale` in the `beamerposter` options to change the format. All decorations are defined relative to `\paperwidth`/`\paperheight`, so they adapt automatically.
+Change `orientation`, `size` (`a0`, `a1`, ...) and `scale` in the `beamerposter` options to change the format. All decorations are defined relative to `\paperwidth`/`\paperheight`, so they adapt automatically.
 
 ### Blocks
 
@@ -110,24 +110,20 @@ Use them in text (`\textcolor{inria-2024-framboise}{...}`) and, ideally, in your
 
 ### Bibliography and QR code
 
-The reference to your own paper is kept in a `filecontents*` block at the top of `poster.tex`, which writes `self.bib` at compile time. Edit the entry there (title, authors, venue, DOI, HAL identifier) and it will be typeset with `\fullcite{author-year:keyword}` next to the QR code. Update the URL passed to `\qrcode` so that it points to your paper or code.
+The reference to your own paper is kept in a `filecontents*` block at the top of `inria-poster.tex`, which writes `self.bib` at compile time. Edit the entry there (title, authors, venue, DOI, HAL identifier) and it will be typeset with `\fullcite{this-paper}` next to the QR code. Update the URL passed to `\qrcode` so that it points to your paper or code.
 
-### Figures
-
-Put your figures in a `figures/` directory (see `\graphicspath`) or input TikZ pictures as done with the samples in [sample-figs/](sample-figs/).
 
 ## Repository layout
 
-```
-.
-├── poster.tex        Example poster and main document
+```text
+|
+├── inria-poster.tex            Example poster and main document
 ├── beamerthemeInriaPoster.sty  Poster theme: header, footer, blocks, decorations
 ├── beamercolorthemeinria.sty   Inria 2024 colour palette
 ├── sample-figs/                TikZ sample figures used in the example
-├── theme/                      Inria 2024 beamer theme (upstream) and artwork
-│   ├── rf-inria.pdf            RF Inria block mark used in the header
-│   └── imgs/                   Logos and original decoration artwork
-└── preview.png                 Rendered preview of the example poster
+└── theme/                      Inria 2024 beamer theme (upstream) and artwork
+    ├── rf-inria.pdf            RF Inria block mark used in the header
+    └── demo.png                Demo poster image used in the README
 ```
 
 The files in [theme/](theme/) come from the official Inria beamer template and are kept for reference and for the logo assets. The poster itself only loads `beamerthemeInriaPoster.sty` and `beamercolorthemeinria.sty` from the repository root.
@@ -152,6 +148,6 @@ This template is far from perfect. Issues and pull requests with fixes, new bloc
 
 ## License and trademarks
 
-The Inria logos, block mark and visual identity are the property of Inria and are governed by its [charter](https://www.inria.fr/en/charter-use-visual-identity-inria). No license has been chosen yet for the template code itself.
+The Inria logos, block mark and visual identity are the property of Inria and are governed by its [charter](https://www.inria.fr/en/charter-use-visual-identity-inria).
 
 Made with ❤️ by [Inria Chile](https://inria.cl).
