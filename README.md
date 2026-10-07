@@ -17,6 +17,14 @@ The repository ships a complete, compilable example poster (`inria-poster.tex`, 
 - Inria Sans and Fira Code fonts, `minted` code listings, `biblatex` bibliography with HAL support, and a QR code pointing to your paper or code.
 - Sample TikZ figures using the Inria colours in [sample-figs/](sample-figs/).
 
+## Resources
+
+- Source for this poster is available in: <https://github.com/Inria-Chile/inria-latex-poster>.
+- Charter of use of the visual identity of Inria: <https://www.inria.fr/en/charter-use-visual-identity-inria>.
+- Inria official visual identity in Numin: <https://numin.inria.fr/portal/g/:spaces:71lwaa/base_de_connaissance/notes/106>.
+- Inria fonts in LaTeX: <https://gitlab.inria.fr/gabarits/latex-inria-fonts>.
+- Inria LaTeX beamer template: <https://gitlab.inria.fr/gabarits/latex-beamer-2024>.
+
 ## Requirements
 
 - A recent **TeX Live** (2025 or later) or equivalent distribution, compiled with **XeLaTeX** (the template uses `mathspec`/`fontspec`).
