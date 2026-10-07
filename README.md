@@ -1,5 +1,8 @@
 # Inria LaTeX poster template
 
+[![Open in Overleaf](https://img.shields.io/badge/Open%20in-Overleaf-blue?logo=overleaf&style=for-the-badge)](https://www.overleaf.com/latex/templates/inria-poster/vkqrvvstytqs)
+[![License: MIT](https://img.shields.io/github/license/Inria-Chile/inria-latex-poster?style=for-the-badge)](LICENSE)
+
 A [beamer](https://ctan.org/pkg/beamer) + [beamerposter](https://ctan.org/pkg/beamerposter) template for scientific posters that follows the **Inria 2024 visual identity charter**, including the *République Française / Inria* block mark ("RF" logo) in the header and the Inria colour palette throughout. It is maintained by [Inria Chile](https://inria.cl).
 
 The repository ships a complete, compilable example poster (`inria-poster.tex`, DIN A0 portrait) whose content doubles as documentation of the blocks and boxes provided by the theme.
